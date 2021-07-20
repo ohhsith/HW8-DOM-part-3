@@ -11,23 +11,28 @@ showNum(2,5);
 
 console.log('------------- #4')
 
-let now = new Date();
-let time = document.querySelector('.time')
-let hours = now.getHours() < 10 ? '0' + now.getHours() : now.getHours();
-let minutes = now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes();
-let seconds = now.getSeconds() < 10 ? '0' + now.getSeconds() : now.getSeconds();
+let time = document.querySelector('.time');
 
-let fullFormat = setInterval(() => {
+function showTime(t=1) {
     
-   time.innerHTML=`${hours}:${minutes}:${seconds}`;
+    let int = setInterval(function(){
+        let now = new Date();
+        let hours = now.getHours() < 10 ? '0' + now.getHours() : now.getHours();
+        let minutes = now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes();
+        let seconds = now.getSeconds() < 10 ? '0' + now.getSeconds() : now.getSeconds(); 
+        t==1 ? time.innerHTML=`${hours}:${minutes}:${seconds}`: time.innerHTML=`${hours}:${minutes}`;
+    }, 1000);  
+     
+    time.addEventListener('click', () =>{
+        clearInterval(int);   
+        showTime(2);
+    });
     
-}, 1000);
+} 
+showTime();
 
 
-time.addEventListener('click', () =>{
-    clearInterval(fullFormat);
-    let shortFormat = setInterval(() => {
-        time.innerHTML=`${hours}:${minutes}`; 
-    }, 1000);
-});
-    
+
+
+
+
